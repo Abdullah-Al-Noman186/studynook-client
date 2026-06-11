@@ -19,6 +19,7 @@ const Navbar = () => {
     const getSession = async () => {
       try {
         const session = await authClient.getSession();
+        console.log("Session:", session);
         setUser(session?.data?.user || null);
       } catch (err) {
         console.log(err);

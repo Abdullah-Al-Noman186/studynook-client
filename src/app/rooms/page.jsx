@@ -9,10 +9,10 @@ const RoomsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   useEffect(() => {
-  document.title = "StudyNook – Available Rooms";
+  document.title = "StudyNook - Available Rooms";
   }, []);
 
-  // 🔍 FILTER STATES
+
   const [search, setSearch] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");

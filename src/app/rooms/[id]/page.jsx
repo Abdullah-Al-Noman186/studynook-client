@@ -19,7 +19,7 @@ const RoomDetailsPage = () => {
   const [deleting, setDeleting] = useState(false);
   useEffect(() => {
   if (room) document.title = `StudyNook – ${room.roomName}`;
-}, [room]);
+  }, [room]);
 
   useEffect(() => {
     const getUser = async () => {
