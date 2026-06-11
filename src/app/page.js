@@ -3,6 +3,7 @@
 import Hero from "../components/Hero";
 import { motion } from "framer-motion";
 import LatestRooms from "../components/LatestRooms";
+import { useEffect } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -19,6 +20,9 @@ const container = {
 };
 
 const HomePage = () => {
+  useEffect(() => {
+  document.title = "StudyNook – Home";
+  }, []);
   return (
     <div>
       <Hero />

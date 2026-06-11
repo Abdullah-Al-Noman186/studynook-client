@@ -11,6 +11,9 @@ const RegisterPage = () => {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+  document.title = "StudyNook – Register";
+  }, []);
 
   const validatePassword = (password) => {
     if (password.length < 6) {

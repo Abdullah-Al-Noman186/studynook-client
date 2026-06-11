@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Toast Component
 const Toast = ({ message, type }) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -26,6 +25,10 @@ const MyBookingsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [cancelling, setCancelling] = useState(false);
   const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    document.title = "StudyNook – My Bookings";
+  }, []);
 
   const showToast = (message, type = "success") => {
     setToast({ message, type });
@@ -67,7 +70,7 @@ const MyBookingsPage = () => {
       setCancelling(true);
 
       const res = await fetch(
-        `http://localhost:5000/bookings/${selectedBooking._id}/cancel`,
+        `https://studynook-serversite.vercel.app/bookings/${selectedBooking._id}/cancel`,
         {
           method: "PATCH",
           headers: {
@@ -125,13 +128,11 @@ const MyBookingsPage = () => {
     <div className="min-h-screen py-12 px-4 bg-gray-50 text-gray-900">
       <div className="max-w-6xl mx-auto">
 
-        {/* Title */}
         <motion.div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-900">My Bookings</h1>
           <p className="text-gray-600 mt-2">Manage your booked study rooms</p>
         </motion.div>
 
-        {/* Empty state */}
         {bookings.length === 0 ? (
           <div className="bg-white p-10 text-center rounded-2xl shadow">
             <h2 className="text-xl font-semibold text-gray-800">
@@ -162,7 +163,6 @@ const MyBookingsPage = () => {
                   return (
                     <tr key={booking._id} className="border-b hover:bg-gray-50">
 
-                      {/* Room */}
                       <td className="p-3 flex items-center gap-3">
                         <img
                           src={booking.roomImage}
@@ -174,20 +174,16 @@ const MyBookingsPage = () => {
                         </span>
                       </td>
 
-                      {/* Date */}
                       <td className="p-3 text-gray-700">{booking.date}</td>
 
-                      {/* Time */}
                       <td className="p-3 text-gray-700">
                         {booking.startTime} - {booking.endTime}
                       </td>
 
-                      {/* Cost */}
                       <td className="p-3 font-bold text-indigo-600">
                         ${booking.totalCost}
                       </td>
 
-                      {/* Status */}
                       <td className="p-3">
                         <span
                           className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -200,7 +196,6 @@ const MyBookingsPage = () => {
                         </span>
                       </td>
 
-                      {/* Action */}
                       <td className="p-3">
                         {canCancel ? (
                           <button
@@ -225,7 +220,6 @@ const MyBookingsPage = () => {
         )}
       </div>
 
-      {/* CANCEL MODAL */}
       <AnimatePresence>
         {showModal && selectedBooking && (
           <motion.div
@@ -274,13 +268,9 @@ const MyBookingsPage = () => {
         )}
       </AnimatePresence>
 
-      {/* TOAST */}
       <AnimatePresence>
         {toast && (
-          <Toast
-            message={toast.message}
-            type={toast.type}
-          />
+          <Toast message={toast.message} type={toast.type} />
         )}
       </AnimatePresence>
     </div>

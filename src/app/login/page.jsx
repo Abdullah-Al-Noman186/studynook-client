@@ -11,6 +11,9 @@ const LoginPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  useEffect(() => {
+  document.title = "StudyNook – Login";
+  }, []);
 
   // Email Login
   const handleLogin = async (e) => {

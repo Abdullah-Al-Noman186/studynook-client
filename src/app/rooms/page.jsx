@@ -8,6 +8,9 @@ const RoomsPage = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  useEffect(() => {
+  document.title = "StudyNook – Available Rooms";
+  }, []);
 
   // 🔍 FILTER STATES
   const [search, setSearch] = useState("");
