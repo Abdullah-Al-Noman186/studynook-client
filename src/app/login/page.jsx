@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
+import { useState, useEffect } from "react";
 
 const LoginPage = () => {
   const router = useRouter();
