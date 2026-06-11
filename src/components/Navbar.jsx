@@ -53,6 +53,14 @@ const Navbar = () => {
       ? "bg-indigo-600 text-white"
       : "text-gray-700 hover:text-indigo-600 hover:bg-indigo-50";
 
+  if (loading) {
+    return (
+      <nav className="h-20 flex items-center justify-center bg-white border-b">
+        <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+      </nav>
+    );
+  }
+
   return (
     <nav className="sticky top-0 z-50 bg-white border-b text-gray-900">
       <div className="h-[3px] bg-gradient-to-r from-indigo-600 via-sky-500 to-indigo-600" />
@@ -71,20 +79,20 @@ const Navbar = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`px-4 py-2 rounded-full font-medium transition ${activeClass(item.href)}`}
+              className={`px-4 py-2 rounded-full font-medium transition ${activeClass(
+                item.href
+              )}`}
             >
               {item.name}
             </Link>
           ))}
 
-          {/* Auth buttons — show skeleton while loading */}
-          {loading ? (
-            <div className="w-24 h-9 bg-gray-200 rounded-full animate-pulse" />
-          ) : !user ? (
+          {!user ? (
             <>
               <Link className="text-gray-700 hover:text-indigo-600" href="/login">
                 Login
               </Link>
+
               <Link
                 className="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold"
                 href="/register"
@@ -94,6 +102,7 @@ const Navbar = () => {
             </>
           ) : (
             <div className="relative group">
+
               <Image
                 src={user.image || "/profile.png"}
                 alt="Profile"
@@ -104,16 +113,23 @@ const Navbar = () => {
 
               {/* Dropdown */}
               <div className="absolute right-0 mt-3 w-64 bg-white border shadow-xl rounded-xl p-4 hidden group-hover:block z-50">
+
                 <div className="text-center border-b pb-3 mb-3">
                   <Image
                     src={user.image || "/profile.png"}
                     width={60}
                     height={60}
                     className="rounded-full mx-auto"
-                    alt="User profile"
+                    
                   />
-                  <p className="font-bold text-gray-900 mt-2">{user.name}</p>
-                  <p className="text-sm text-gray-500">{user.email}</p>
+
+                  <p className="font-bold text-gray-900 mt-2">
+                    {user.name}
+                  </p>
+
+                  <p className="text-sm text-gray-500">
+                    {user.email}
+                  </p>
                 </div>
 
                 <Link
@@ -172,13 +188,12 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              {loading ? (
-                <div className="w-full h-10 bg-gray-200 rounded-xl animate-pulse" />
-              ) : !user ? (
+              {!user ? (
                 <>
                   <Link href="/login" className="px-4 py-3 text-gray-700">
                     Login
                   </Link>
+
                   <Link
                     href="/register"
                     className="bg-indigo-600 text-white py-3 rounded-xl text-center"
@@ -194,19 +209,25 @@ const Navbar = () => {
                       width={45}
                       height={45}
                       className="rounded-full"
-                      alt="User profile mobile"
                     />
+
                     <div>
                       <p className="font-semibold">{user.name}</p>
                       <p className="text-sm text-gray-500">{user.email}</p>
                     </div>
                   </div>
 
-                  <Link href="/my-listings" className="px-4 py-3 hover:bg-gray-100 rounded">
+                  <Link
+                    href="/my-listings"
+                    className="px-4 py-3 hover:bg-gray-100 rounded"
+                  >
                     My Listings
                   </Link>
 
-                  <Link href="/my-bookings" className="px-4 py-3 hover:bg-gray-100 rounded">
+                  <Link
+                    href="/my-bookings"
+                    className="px-4 py-3 hover:bg-gray-100 rounded"
+                  >
                     My Bookings
                   </Link>
 
