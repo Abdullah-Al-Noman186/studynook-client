@@ -34,7 +34,7 @@ const RoomDetailsPage = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/rooms/${id}`);
+        const res = await fetch(`https://studynook-client-delta.vercel.app//rooms/${id}`);
         if (!res.ok) throw new Error("Failed to fetch room");
         const data = await res.json();
         setRoom(data);
