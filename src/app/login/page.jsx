@@ -5,35 +5,15 @@ import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const Toast = ({ message, type }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 50 }}
-    className={`fixed bottom-6 right-6 z-50 px-6 py-4 rounded-xl shadow-xl text-white font-semibold ${
-      type === "success" ? "bg-green-500" : "bg-red-500"
-    }`}
-  >
-    {message}
-  </motion.div>
-);
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
   const router = useRouter();
-
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     document.title = "StudyNook – Login";
   }, []);
-
-  const showToast = (message, type = "success") => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -51,15 +31,15 @@ const LoginPage = () => {
       });
 
       if (error) {
-        showToast(error.message || "Invalid email or password", "error");
+        toast.error(error.message || "Invalid email or password");
         setLoading(false);
         return;
       }
 
-      showToast("Login successful! Redirecting...", "success");
+      toast.success("Login successful!");
       setTimeout(() => router.push("/"), 1000);
     } catch (err) {
-      showToast(err.message || "Login failed", "error");
+      toast.error(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -74,6 +54,8 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-sky-50 flex items-center justify-center px-4 py-10">
+      <Toaster position="top-right" />
+
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-200 p-8">
 
         {/* Heading */}
@@ -89,7 +71,6 @@ const LoginPage = () => {
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-5">
 
-          {/* Email */}
           <div>
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Email
@@ -103,7 +84,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Password
@@ -117,7 +97,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Login Button */}
           <button
             type="submit"
             disabled={loading}
@@ -127,14 +106,12 @@ const LoginPage = () => {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="flex items-center gap-3 my-6">
           <div className="flex-1 h-px bg-slate-300"></div>
           <span className="text-slate-500 text-sm">OR</span>
           <div className="flex-1 h-px bg-slate-300"></div>
         </div>
 
-        {/* Google */}
         <button
           onClick={handleGoogleLogin}
           className="w-full border border-slate-300 bg-white hover:bg-slate-50 rounded-xl py-3 flex items-center justify-center gap-3 font-medium text-slate-800 transition"
@@ -143,22 +120,13 @@ const LoginPage = () => {
           Continue with Google
         </button>
 
-        {/* Register Link */}
         <p className="text-center mt-6 text-slate-600">
           Don't have an account?{" "}
-          <Link
-            href="/register"
-            className="text-indigo-600 font-semibold hover:underline"
-          >
+          <Link href="/register" className="text-indigo-600 font-semibold hover:underline">
             Register
           </Link>
         </p>
       </div>
-
-      {/* Toast */}
-      <AnimatePresence>
-        {toast && <Toast message={toast.message} type={toast.type} />}
-      </AnimatePresence>
     </div>
   );
 };
