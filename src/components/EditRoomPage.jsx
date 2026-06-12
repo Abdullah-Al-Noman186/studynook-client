@@ -95,7 +95,7 @@ const EditRoomPage = () => {
         amenities: selectedAmenities,
       };
 
-      const res = await fetch(`http://localhost:5000/rooms/${id}`, {
+      const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
