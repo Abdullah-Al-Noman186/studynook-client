@@ -1,30 +1,45 @@
 "use client";
 
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const Toast = ({ message, type }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 50 }}
+    className={`fixed bottom-6 right-6 z-50 px-6 py-4 rounded-xl shadow-xl text-white font-semibold ${
+      type === "success" ? "bg-green-500" : "bg-red-500"
+    }`}
+  >
+    {message}
+  </motion.div>
+);
 
 const LoginPage = () => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [toast, setToast] = useState(null);
+
   useEffect(() => {
-  document.title = "StudyNook – Login";
+    document.title = "StudyNook – Login";
   }, []);
 
-  // Email Login
+  const showToast = (message, type = "success") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    setError("");
     setLoading(true);
 
     const form = e.target;
-
     const email = form.email.value;
     const password = form.password.value;
 
@@ -36,20 +51,20 @@ const LoginPage = () => {
       });
 
       if (error) {
-        setError(error.message);
+        showToast(error.message || "Invalid email or password", "error");
         setLoading(false);
         return;
       }
 
-      router.push("/");
+      showToast("Login successful! Redirecting...", "success");
+      setTimeout(() => router.push("/"), 1000);
     } catch (err) {
-      setError(err.message || "Login failed");
+      showToast(err.message || "Login failed", "error");
     } finally {
       setLoading(false);
     }
   };
 
-  // Google Login
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
@@ -66,7 +81,6 @@ const LoginPage = () => {
           <h1 className="text-4xl font-bold text-indigo-700">
             Welcome Back
           </h1>
-
           <p className="text-slate-600 mt-2">
             Login to your StudyNook account
           </p>
@@ -80,7 +94,6 @@ const LoginPage = () => {
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Email
             </label>
-
             <input
               type="email"
               name="email"
@@ -95,7 +108,6 @@ const LoginPage = () => {
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Password
             </label>
-
             <input
               type="password"
               name="password"
@@ -105,18 +117,11 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Error */}
-          {error && (
-            <div className="bg-red-100 border border-red-300 rounded-xl p-3 text-red-600 text-sm">
-              {error}
-            </div>
-          )}
-
           {/* Login Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition disabled:opacity-60"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
@@ -149,6 +154,11 @@ const LoginPage = () => {
           </Link>
         </p>
       </div>
+
+      {/* Toast */}
+      <AnimatePresence>
+        {toast && <Toast message={toast.message} type={toast.type} />}
+      </AnimatePresence>
     </div>
   );
 };
