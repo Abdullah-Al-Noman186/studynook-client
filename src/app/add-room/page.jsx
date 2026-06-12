@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+
 
 const amenitiesList = [
   "Whiteboard",
@@ -23,32 +25,56 @@ const AddRoomPage = () => {
     );
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const form = e.target;
+  const form = e.target;
 
-    const roomData = {
-      roomName: form.roomName.value,
-      description: form.description.value,
-      image: form.image.value,
-      floor: form.floor.value,
-      capacity: Number(form.capacity.value),
-      hourlyRate: Number(form.hourlyRate.value),
-      amenities: selectedAmenities,
-    };
+  const roomData = {
+    roomName: form.roomName.value,
+    description: form.description.value,
+    image: form.image.value,
+    floor: form.floor.value,
+    capacity: Number(form.capacity.value),
+    hourlyRate: Number(form.hourlyRate.value),
+    amenities: selectedAmenities,
+  };
 
-    const res = await fetch("https://studynook-server-8mek.onrender.com/rooms", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(roomData),
-    });
+  const toastId = toast.loading("Adding room...");
+
+  try {
+    const res = await fetch(
+      "https://studynook-server-8mek.onrender.com/rooms",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(roomData),
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to add room");
+    }
 
     const data = await res.json();
     console.log(data);
-  };
+
+    toast.success("Room added successfully!", {
+      id: toastId,
+    });
+
+    form.reset();
+    setSelectedAmenities([]);
+  } catch (error) {
+    console.error(error);
+
+    toast.error(error.message || "Failed to add room", {
+      id: toastId,
+    });
+  }
+};
 
   const inputStyle =
     "w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500";
