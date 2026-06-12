@@ -14,7 +14,7 @@ const LatestRooms = () => {
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const res = await fetch("https://studynook-serversite.vercel.app//rooms/latest");
+      const res = await fetch("https://studynook-server-8mek.onrender.com/rooms/latest");
       const data = await res.json();
       setRooms(data);
     };

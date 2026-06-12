@@ -68,7 +68,7 @@ const BookingModal = ({
         specialNote: note,
       };
 
-      const res = await fetch("https://studynook-serversite.vercel.app/bookings", {
+      const res = await fetch("https://studynook-server-8mek.onrender.com/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

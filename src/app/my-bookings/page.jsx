@@ -48,7 +48,7 @@ const MyBookingsPage = () => {
         setSession(sessionData.data);
 
         const res = await fetch(
-          `https://studynook-serversite.vercel.app/bookings?email=${sessionData.data.user.email}`
+          `https://studynook-server-8mek.onrender.com/bookings?email=${sessionData.data.user.email}`
         );
 
         const data = await res.json();
@@ -70,7 +70,7 @@ const MyBookingsPage = () => {
       setCancelling(true);
 
       const res = await fetch(
-        `https://studynook-serversite.vercel.app/bookings/${selectedBooking._id}/cancel`,
+        `https://studynook-server-8mek.onrender.com/bookings/${selectedBooking._id}/cancel`,
         {
           method: "PATCH",
           headers: {

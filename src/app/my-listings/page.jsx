@@ -50,7 +50,7 @@ const MyListingsPage = () => {
         setUser(session.data.user);
 
         const res = await fetch(
-          `https://studynook-serversite.vercel.app/rooms?ownerId=${session.data.user.id}`
+          `https://studynook-server-8mek.onrender.com/rooms?ownerId=${session.data.user.id}`
         );
         const data = await res.json();
         setRooms(data);
@@ -71,7 +71,7 @@ const MyListingsPage = () => {
       setDeleting(true);
 
       const res = await fetch(
-        `https://studynook-serversite.vercel.app/rooms/${selectedRoom._id}`,
+        `https://studynook-server-8mek.onrender.com/rooms/${selectedRoom._id}`,
         { method: "DELETE" }
       );
 

@@ -38,7 +38,7 @@ const EditRoomPage = () => {
       try {
         setLoading(true);
 
-        const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`);
+        const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`);
 
         if (!res.ok) throw new Error("Failed to load room");
 
@@ -95,7 +95,7 @@ const EditRoomPage = () => {
         amenities: selectedAmenities,
       };
 
-      const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`, {
+      const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

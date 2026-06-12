@@ -28,7 +28,7 @@ const RoomsPage = () => {
       if (maxPrice) query.append("maxPrice", maxPrice);
 
       const res = await fetch(
-        `https://studynook-serversite.vercel.app/rooms?${query.toString()}`
+        `https://studynook-server-8mek.onrender.com/rooms?${query.toString()}`
       );
 
       if (!res.ok) throw new Error("Failed to fetch rooms");

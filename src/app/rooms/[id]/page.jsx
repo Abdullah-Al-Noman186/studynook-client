@@ -34,7 +34,7 @@ const RoomDetailsPage = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`);
+        const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`);
         if (!res.ok) throw new Error("Failed to fetch room");
         const data = await res.json();
         setRoom(data);
@@ -51,7 +51,7 @@ const RoomDetailsPage = () => {
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`, {
+      const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -67,7 +67,7 @@ const RoomDetailsPage = () => {
   // Called after successful booking to increment bookingCount in UI
   const handleBookingSuccess = async () => {
     try {
-      const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`,
+      const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`,
         
         
       );

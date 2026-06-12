@@ -38,7 +38,7 @@ const AddRoomPage = () => {
       amenities: selectedAmenities,
     };
 
-    const res = await fetch("https://studynook-serversite.vercel.app/rooms", {
+    const res = await fetch("https://studynook-server-8mek.onrender.com/rooms", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
