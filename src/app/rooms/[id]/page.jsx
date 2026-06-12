@@ -18,8 +18,9 @@ const RoomDetailsPage = () => {
   const [showDelete, setShowDelete] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
   useEffect(() => {
-  if (room) document.title = `StudyNook – ${room.roomName}`;
+    if (room) document.title = `StudyNook – ${room.roomName}`;
   }, [room]);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const RoomDetailsPage = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`);
+        const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`);
         if (!res.ok) throw new Error("Failed to fetch room");
         const data = await res.json();
         setRoom(data);
@@ -50,58 +51,36 @@ const RoomDetailsPage = () => {
   }, [id]);
 
   const handleDelete = async () => {
-  const toastId = toast.loading("Deleting room...");
+    const toastId = toast.loading("Deleting room...");
+    try {
+      setDeleting(true);
+      const res = await fetch(
+        `https://studynook-serversite.vercel.app/rooms/${id}`,
+        { method: "DELETE" }
+      );
 
-  try {
-    setDeleting(true);
+      if (!res.ok) throw new Error("Failed to delete room");
 
-    const res = await fetch(
-      `https://studynook-server-8mek.onrender.com/rooms/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to delete room");
+      toast.success("Room deleted successfully!", { id: toastId });
+      setTimeout(() => router.push("/rooms"), 1000);
+    } catch (err) {
+      toast.error(err.message || "Failed to delete room", { id: toastId });
+    } finally {
+      setDeleting(false);
     }
+  };
 
-    toast.success("Room deleted successfully!", {
-      id: toastId,
-    });
-
-    setTimeout(() => {
-      router.push("/rooms");
-    }, 1000);
-  } catch (err) {
-    toast.error(err.message || "Failed to delete room", {
-      id: toastId,
-    });
-  } finally {
-    setDeleting(false);
-  }
-};
-
-  // Called after successful booking to increment bookingCount in UI
   const handleBookingSuccess = async () => {
-  try {
-    toast.success("Room booked successfully! 🎉");
-
-    const res = await fetch(
-      `https://studynook-server-8mek.onrender.com/rooms/${id}`
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to refresh room data");
+    try {
+      toast.success("Room booked successfully! 🎉");
+      const res = await fetch(`https://studynook-serversite.vercel.app/rooms/${id}`);
+      if (!res.ok) throw new Error("Failed to refresh room data");
+      const data = await res.json();
+      setRoom(data);
+    } catch (err) {
+      console.error(err);
     }
-
-    const data = await res.json();
-    setRoom(data);
-  } catch (err) {
-    console.error(err);
-    toast.error("Failed to refresh room details");
-  }
-};
+  };
 
   if (loading) {
     return (
@@ -119,7 +98,7 @@ const RoomDetailsPage = () => {
     );
   }
 
- const isOwner = user?.email === room?.ownerEmail;
+  const isOwner = !!user;
 
   return (
     <>
@@ -154,7 +133,6 @@ const RoomDetailsPage = () => {
 
             {/* INFO GRID */}
             <div className="grid grid-cols-2 gap-4">
-
               <div className="bg-white rounded-2xl shadow p-5">
                 <p className="text-slate-500 text-sm">Floor</p>
                 <h3 className="font-bold text-lg text-indigo-950">{room.floor}</h3>
@@ -176,7 +154,6 @@ const RoomDetailsPage = () => {
                   {room.bookingCount || 0}
                 </h3>
               </div>
-
             </div>
 
             {/* AMENITIES */}
@@ -214,7 +191,7 @@ const RoomDetailsPage = () => {
             {/* OWNER ACTIONS */}
             {isOwner && (
               <div className="space-y-4 pt-4 border-t border-slate-200">
-                <p className="text-sm text-slate-400 font-medium">Owner Controls</p>
+                <p className="text-sm text-slate-400 font-medium">Room Controls</p>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <button
@@ -240,7 +217,6 @@ const RoomDetailsPage = () => {
                 </button>
               </div>
             )}
-
           </motion.div>
         </div>
       </div>
