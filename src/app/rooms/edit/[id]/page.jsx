@@ -114,16 +114,16 @@ const EditRoomPage = () => {
       throw new Error(data.message || "Update failed");
     }
 
-    toast.success("Room updated successfully! ✅", {
+    toast.success("Room updated successfully!", {
       id: toastId,
     });
 
+    // Redirect to Room Details page
     setTimeout(() => {
-      router.push(`/rooms/${id}`);
+      router.replace(`/rooms/${id}`);
     }, 1000);
-  } catch (err) {
-    setError(err.message);
 
+  } catch (err) {
     toast.error(err.message || "Failed to update room", {
       id: toastId,
     });
