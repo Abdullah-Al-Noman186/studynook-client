@@ -32,7 +32,7 @@ const EditRoomPage = () => {
     hourlyRate: "",
   });
 
-  // FETCH ROOM DATA
+ 
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -64,7 +64,7 @@ const EditRoomPage = () => {
     if (id) fetchRoom();
   }, [id]);
 
-  // HANDLE INPUT
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -72,7 +72,7 @@ const EditRoomPage = () => {
     });
   };
 
-  // TOGGLE AMENITY
+
   const toggleAmenity = (item) => {
     if (selectedAmenities.includes(item)) {
       setSelectedAmenities(selectedAmenities.filter((a) => a !== item));
@@ -81,7 +81,7 @@ const EditRoomPage = () => {
     }
   };
 
-  // UPDATE ROOM
+  
   const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -118,7 +118,7 @@ const EditRoomPage = () => {
       id: toastId,
     });
 
-    // Redirect to Room Details page
+  
     setTimeout(() => {
       router.replace(`/rooms/${id}`);
     }, 1000);
@@ -151,7 +151,7 @@ const EditRoomPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50 py-10 px-4">
 
-      {/* HEADER */}
+     
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ const EditRoomPage = () => {
         </p>
       </motion.div>
 
-      {/* FORM */}
+     
       <motion.form
         onSubmit={handleSubmit}
         initial={{ opacity: 0, scale: 0.95 }}
@@ -173,7 +173,7 @@ const EditRoomPage = () => {
         className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8 space-y-5"
       >
 
-        {/* ROOM NAME */}
+       
         <input
           name="roomName"
           value={formData.roomName}
@@ -182,7 +182,7 @@ const EditRoomPage = () => {
           className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
-        {/* DESCRIPTION */}
+        
         <textarea
           name="description"
           value={formData.description}
@@ -192,7 +192,7 @@ const EditRoomPage = () => {
           className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
-        {/* IMAGE */}
+        
         <input
           name="image"
           value={formData.image}
@@ -201,7 +201,6 @@ const EditRoomPage = () => {
           className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
-        {/* FLOOR + CAPACITY */}
         <div className="grid md:grid-cols-2 gap-4">
 
           <input
@@ -223,7 +222,7 @@ const EditRoomPage = () => {
 
         </div>
 
-        {/* HOURLY RATE */}
+        
         <input
           name="hourlyRate"
           value={formData.hourlyRate}
@@ -233,7 +232,7 @@ const EditRoomPage = () => {
           className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900"
         />
 
-        {/* AMENITIES */}
+        
         <div>
           <h3 className="font-semibold mb-2">Amenities</h3>
 
@@ -254,7 +253,7 @@ const EditRoomPage = () => {
           </div>
         </div>
 
-        {/* BUTTON */}
+       
         <button
           type="submit"
           disabled={updating}

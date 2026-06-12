@@ -102,7 +102,7 @@ const MyListingsPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-white via-indigo-50 to-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -121,7 +121,7 @@ const MyListingsPage = () => {
           </button>
         </motion.div>
 
-        {/* Empty state */}
+        
         {rooms.length === 0 ? (
           <div className="bg-white p-10 text-center rounded-2xl shadow">
             <div className="text-6xl mb-4">🏫</div>
@@ -147,14 +147,14 @@ const MyListingsPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100"
               >
-                {/* Image */}
+               
                 <img
                   src={room.image}
                   alt={room.roomName}
                   className="h-48 w-full object-cover"
                 />
 
-                {/* Content */}
+                
                 <div className="p-5 space-y-2">
                   <h2 className="text-xl font-bold text-slate-800">
                     {room.roomName}
@@ -177,7 +177,7 @@ const MyListingsPage = () => {
                     📊 {room.bookingCount || 0} bookings
                   </div>
 
-                  {/* Actions */}
+                  
                   <div className="grid grid-cols-3 gap-2 pt-2">
                     <button
                       onClick={() => router.push(`/rooms/${room._id}`)}
@@ -210,7 +210,7 @@ const MyListingsPage = () => {
         )}
       </div>
 
-      {/* DELETE MODAL */}
+      
       <AnimatePresence>
         {showDelete && selectedRoom && (
           <motion.div
@@ -256,7 +256,7 @@ const MyListingsPage = () => {
         )}
       </AnimatePresence>
 
-      {/* TOAST */}
+      
       <AnimatePresence>
         {toast && <Toast message={toast.message} type={toast.type} />}
       </AnimatePresence>

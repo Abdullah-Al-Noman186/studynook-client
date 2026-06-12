@@ -117,7 +117,7 @@ const BookingModal = ({
 
             <form onSubmit={handleSubmit} className="space-y-5">
 
-              {/* Date */}
+             
 
               <div>
                 <label className="block mb-2 font-medium text-slate-900">
@@ -134,7 +134,7 @@ const BookingModal = ({
                 />
               </div>
 
-              {/* Start Time */}
+              
 
               <div>
                 <label className="block mb-2 font-medium text-slate-900">
@@ -162,8 +162,7 @@ const BookingModal = ({
                 </select>
               </div>
 
-              {/* End Time */}
-
+              
               <div>
                 <label className="block mb-2 font-medium text-slate-900">
                   End Time
@@ -182,15 +181,14 @@ const BookingModal = ({
                 </select>
               </div>
 
-              {/* Total Cost */}
-
+              
               <div className="rounded-xl bg-indigo-50 p-4">
                 <p className="font-semibold text-indigo-700">
                   Total Cost: ${totalCost}
                 </p>
               </div>
 
-              {/* Special Note */}
+            
 
               <div>
                 <label className="block mb-2 font-medium text-slate-900">
@@ -206,7 +204,6 @@ const BookingModal = ({
                 />
               </div>
 
-              {/* Buttons */}
 
               <div className="grid grid-cols-2 gap-4">
 

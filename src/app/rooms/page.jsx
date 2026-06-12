@@ -42,12 +42,12 @@ const RoomsPage = () => {
     }
   };
 
-  // initial load
+  
   useEffect(() => {
     fetchRooms();
   }, []);
 
-  // animation
+ 
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -64,7 +64,7 @@ const RoomsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50 py-12 px-4">
 
-      {/* HEADER */}
+     
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -78,12 +78,12 @@ const RoomsPage = () => {
         </p>
       </motion.div>
 
-      {/* 🔍 FILTER BAR */}
+      
       <div className="max-w-5xl mx-auto mb-10 bg-white p-5 rounded-2xl shadow-md border border-slate-100">
 
         <div className="grid md:grid-cols-3 gap-4">
 
-          {/* SEARCH */}
+         
           <input
             type="text"
             placeholder="Search rooms..."
@@ -92,7 +92,7 @@ const RoomsPage = () => {
             className="input input-bordered w-full"
           />
 
-          {/* MIN PRICE */}
+          
           <input
             type="number"
             placeholder="Min Price"
@@ -101,7 +101,7 @@ const RoomsPage = () => {
             className="input input-bordered w-full"
           />
 
-          {/* MAX PRICE */}
+          
           <input
             type="number"
             placeholder="Max Price"
@@ -112,7 +112,7 @@ const RoomsPage = () => {
 
         </div>
 
-        {/* BUTTON */}
+      
         <div className="mt-4 flex justify-end">
           <button
             onClick={fetchRooms}
@@ -126,7 +126,7 @@ const RoomsPage = () => {
 
       <div className="max-w-7xl mx-auto">
 
-        {/* LOADING */}
+      
         {loading && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -138,14 +138,14 @@ const RoomsPage = () => {
           </div>
         )}
 
-        {/* ERROR */}
+      
         {error && (
           <div className="text-center text-red-500 font-medium">
             {error}
           </div>
         )}
 
-        {/* EMPTY */}
+        
         {!loading && rooms.length === 0 && !error && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -160,7 +160,7 @@ const RoomsPage = () => {
           </motion.div>
         )}
 
-        {/* GRID */}
+        
         {!loading && rooms.length > 0 && (
           <motion.div
             variants={container}
@@ -175,14 +175,14 @@ const RoomsPage = () => {
                 whileHover={{ scale: 1.03, y: -6 }}
                 className="bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden border border-slate-100"
               >
-                {/* IMAGE */}
+                
                 <img
                   src={room.image}
                   alt={room.roomName}
                   className="h-52 w-full object-cover hover:scale-110 transition duration-300"
                 />
 
-                {/* CONTENT */}
+               
                 <div className="p-5 space-y-2">
 
                   <h2 className="text-xl font-bold text-slate-800">
@@ -202,7 +202,7 @@ const RoomsPage = () => {
                     ${room.hourlyRate}/hr
                   </div>
 
-                  {/* BUTTON */}
+                  
                   <Link
                     href={`/rooms/${room._id}`}
                     className="block text-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl font-medium transition"

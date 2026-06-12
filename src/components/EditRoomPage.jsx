@@ -32,7 +32,7 @@ const EditRoomPage = () => {
     hourlyRate: "",
   });
 
-  // FETCH ROOM DATA
+ 
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -64,7 +64,7 @@ const EditRoomPage = () => {
     if (id) fetchRoom();
   }, [id]);
 
-  // HANDLE INPUT CHANGE
+ 
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -72,7 +72,7 @@ const EditRoomPage = () => {
     });
   };
 
-  // AMENITIES TOGGLE
+  
   const toggleAmenity = (item) => {
     if (selectedAmenities.includes(item)) {
       setSelectedAmenities(selectedAmenities.filter((a) => a !== item));
@@ -81,7 +81,7 @@ const EditRoomPage = () => {
     }
   };
 
-  // UPDATE ROOM
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -152,7 +152,7 @@ const EditRoomPage = () => {
         className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8 space-y-5"
       >
 
-        {/* ROOM NAME */}
+        
         <input
           name="roomName"
           value={formData.roomName}
@@ -161,7 +161,7 @@ const EditRoomPage = () => {
           placeholder="Room Name"
         />
 
-        {/* DESCRIPTION */}
+        
         <textarea
           name="description"
           value={formData.description}
@@ -171,7 +171,7 @@ const EditRoomPage = () => {
           placeholder="Description"
         />
 
-        {/* IMAGE */}
+        
         <input
           name="image"
           value={formData.image}
@@ -231,7 +231,7 @@ const EditRoomPage = () => {
           </div>
         </div>
 
-        {/* BUTTON */}
+        
         <button
           type="submit"
           disabled={updating}

@@ -116,7 +116,7 @@ const handleSubmit = async (e) => {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5 mt-8">
-          {/* Name */}
+          
           <div>
             <label className="block mb-2 font-medium text-slate-800">
               Name
@@ -131,7 +131,7 @@ const handleSubmit = async (e) => {
             />
           </div>
 
-          {/* Email */}
+          
           <div>
             <label className="block mb-2 font-medium text-slate-800">
               Email
@@ -146,7 +146,7 @@ const handleSubmit = async (e) => {
             />
           </div>
 
-          {/* Photo URL */}
+          
           <div>
             <label className="block mb-2 font-medium text-slate-800">
               Photo URL
@@ -161,7 +161,7 @@ const handleSubmit = async (e) => {
             />
           </div>
 
-          {/* Password */}
+          
           <div>
             <label className="block mb-2 font-medium text-slate-800">
               Password

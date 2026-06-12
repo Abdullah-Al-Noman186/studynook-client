@@ -27,7 +27,7 @@ const HomePage = () => {
     <div>
       <Hero />
       
-      {/* Why Choose Us */}
+     
       <section className="py-24 bg-gradient-to-b from-white via-indigo-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         <div className="max-w-7xl mx-auto px-5">
           <motion.h2
@@ -80,7 +80,7 @@ const HomePage = () => {
                 whileHover={{ scale: 1.03 }}
                 className="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden"
               >
-                {/* Gradient glow */}
+                
                 <div
                   className={`absolute -top-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-20 bg-gradient-to-r ${item.color}`}
                 ></div>
@@ -97,7 +97,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+    
       <section className="py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
         <div className="max-w-7xl mx-auto px-5">
           <motion.h2
@@ -143,7 +143,7 @@ const HomePage = () => {
                 whileHover={{ y: -6 }}
                 className="p-8 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden"
               >
-                {/* subtle glow */}
+                
                 <div
                   className={`absolute -bottom-10 -left-10 w-32 h-32 rounded-full blur-3xl opacity-20 bg-gradient-to-r ${item.color}`}
                 ></div>

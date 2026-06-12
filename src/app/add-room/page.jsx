@@ -88,7 +88,7 @@ setTimeout(() => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-sky-50 py-12 px-4 text-slate-900">
 
-      {/* HEADER */}
+      
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ setTimeout(() => {
         </p>
       </motion.div>
 
-      {/* CARD */}
+      
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -110,7 +110,7 @@ setTimeout(() => {
       >
         <form onSubmit={handleSubmit} className="space-y-5">
 
-          {/* ROOM NAME */}
+          
           <div>
             <label className="font-medium">Room Name</label>
             <input
@@ -122,7 +122,7 @@ setTimeout(() => {
             />
           </div>
 
-          {/* DESCRIPTION */}
+         
           <div>
             <label className="font-medium">Description</label>
             <textarea
@@ -134,7 +134,7 @@ setTimeout(() => {
             />
           </div>
 
-          {/* IMAGE */}
+        
           <div>
             <label className="font-medium">Image URL</label>
             <input
@@ -146,7 +146,7 @@ setTimeout(() => {
             />
           </div>
 
-          {/* FLOOR + CAPACITY */}
+          
           <div className="grid md:grid-cols-2 gap-4">
 
             <div>
@@ -174,7 +174,7 @@ setTimeout(() => {
 
           </div>
 
-          {/* RATE */}
+         
           <div>
             <label className="font-medium">Hourly Rate ($)</label>
             <input
@@ -187,7 +187,7 @@ setTimeout(() => {
             />
           </div>
 
-          {/* AMENITIES */}
+          
           <div>
             <label className="font-medium">Amenities</label>
 
@@ -209,7 +209,7 @@ setTimeout(() => {
             </div>
           </div>
 
-          {/* BUTTON */}
+          
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}

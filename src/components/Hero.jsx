@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-indigo-950 to-slate-950 text-white">
 
-      {/* Glow background (same as footer theme) */}
+      
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-600/20 blur-3xl rounded-full" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-sky-500/10 blur-3xl rounded-full" />
@@ -15,7 +15,7 @@ const Hero = () => {
 
       <div className="relative max-w-7xl mx-auto px-5 py-28 grid lg:grid-cols-2 gap-14 items-center">
 
-        {/* LEFT */}
+        
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -35,7 +35,7 @@ const Hero = () => {
             Discover quiet study spaces, reserve instantly, and manage bookings with real-time availability and zero conflicts.
           </p>
 
-          {/* Buttons */}
+         
           <div className="mt-8 flex flex-wrap gap-4">
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -58,7 +58,7 @@ const Hero = () => {
 
           </div>
 
-          {/* Stats */}
+         
           <div className="mt-10 flex gap-10 text-sm text-slate-300">
 
             <div>
@@ -79,7 +79,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT */}
+        
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -87,7 +87,7 @@ const Hero = () => {
           className="relative"
         >
 
-          {/* Image */}
+          
           <motion.img
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3 }}
@@ -96,7 +96,7 @@ const Hero = () => {
             className="rounded-3xl shadow-2xl object-cover h-[520px] w-full border border-white/10"
           />
 
-          {/* Floating Card (modern SaaS style) */}
+        
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}

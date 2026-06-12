@@ -105,7 +105,7 @@ const RoomDetailsPage = () => {
       <div className="min-h-screen bg-gradient-to-b from-white via-indigo-50 to-white py-12 px-4">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10">
 
-          {/* IMAGE */}
+          
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -119,7 +119,7 @@ const RoomDetailsPage = () => {
             />
           </motion.div>
 
-          {/* CONTENT */}
+          
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -131,7 +131,7 @@ const RoomDetailsPage = () => {
 
             <p className="text-slate-600 leading-8">{room.description}</p>
 
-            {/* INFO GRID */}
+            
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white rounded-2xl shadow p-5">
                 <p className="text-slate-500 text-sm">Floor</p>
@@ -156,7 +156,7 @@ const RoomDetailsPage = () => {
               </div>
             </div>
 
-            {/* AMENITIES */}
+            
             <div>
               <h2 className="font-bold text-lg mb-3">Amenities</h2>
               <div className="flex flex-wrap gap-2">
@@ -171,7 +171,7 @@ const RoomDetailsPage = () => {
               </div>
             </div>
 
-            {/* BOOK BUTTON */}
+            
             {user ? (
               <button
                 onClick={() => setShowBooking(true)}
@@ -188,7 +188,7 @@ const RoomDetailsPage = () => {
               </button>
             )}
 
-            {/* OWNER ACTIONS */}
+            
             {isOwner && (
               <div className="space-y-4 pt-4 border-t border-slate-200">
                 <p className="text-sm text-slate-400 font-medium">Room Controls</p>
@@ -221,7 +221,7 @@ const RoomDetailsPage = () => {
         </div>
       </div>
 
-      {/* BOOKING MODAL */}
+      
       <BookingModal
         isOpen={showBooking}
         onClose={() => setShowBooking(false)}
@@ -230,7 +230,7 @@ const RoomDetailsPage = () => {
         onSuccess={handleBookingSuccess}
       />
 
-      {/* DELETE MODAL */}
+      
       <AnimatePresence>
         {showDelete && (
           <motion.div

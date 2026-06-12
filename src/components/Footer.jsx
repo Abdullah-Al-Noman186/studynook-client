@@ -14,14 +14,14 @@ const Footer = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-200 mt-24"
     >
-      {/* Glow Background */}
+      
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-indigo-600/20 blur-3xl rounded-full"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-5 py-16 grid md:grid-cols-3 gap-12">
 
-        {/* Brand */}
+        
         <motion.div whileHover={{ scale: 1.02 }}>
           <h2 className="text-3xl font-bold text-white">
             Study<span className="text-indigo-500">Nook</span>
@@ -33,7 +33,7 @@ const Footer = () => {
           </p>
         </motion.div>
 
-        {/* Links */}
+       
         <div>
           <h3 className="text-lg font-semibold text-white mb-5">
             Useful Links
@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Contact + Social */}
+       
         <div>
           <h3 className="text-lg font-semibold text-white mb-5">
             Get in Touch
@@ -72,7 +72,6 @@ const Footer = () => {
             <p>Phone: +880 1234-567890</p>
           </div>
 
-          {/* Social Icons */}
           <div className="flex gap-4 mt-6">
             {[
               { icon: <FaFacebookF />, link: "#" },
@@ -94,7 +93,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      
       <div className="border-t border-slate-800 py-5 text-center text-sm text-slate-500">
         <motion.p
           initial={{ opacity: 0 }}

@@ -60,12 +60,12 @@ const Navbar = () => {
 
       <div className="max-w-7xl mx-auto px-5 h-20 flex items-center justify-between">
 
-        {/* Logo */}
+        
         <Link href="/" className="text-3xl font-extrabold text-gray-900">
           Study<span className="text-indigo-600">Nook</span>
         </Link>
 
-        {/* Desktop */}
+        
         <div className="hidden lg:flex items-center gap-3 text-gray-900">
 
           {navLinks.map((item) => (
@@ -78,7 +78,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Auth buttons — show skeleton while loading */}
+         
           {loading ? (
             <div className="w-24 h-9 bg-gray-200 rounded-full animate-pulse" />
           ) : !user ? (
@@ -103,7 +103,7 @@ const Navbar = () => {
                 className="rounded-full border-2 border-indigo-500 cursor-pointer"
               />
 
-              {/* Dropdown */}
+             
               <div className="absolute right-0 mt-3 w-64 bg-white border shadow-xl rounded-xl p-4 hidden group-hover:block z-50">
                 <div className="text-center border-b pb-3 mb-3">
                   <Image
@@ -142,7 +142,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Button */}
         <button
           onClick={() => setOpen(!open)}
           className="lg:hidden text-3xl text-gray-900"
@@ -151,7 +150,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      
       <AnimatePresence>
         {open && (
           <motion.div

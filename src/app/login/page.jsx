@@ -23,7 +23,7 @@ const LoginPage = () => {
   const email = form.email.value;
   const password = form.password.value;
 
-  // Show loading toast
+  
   const toastId = toast.loading("Logging in...");
 
   try {
@@ -79,7 +79,7 @@ const LoginPage = () => {
           </p>
         </div>
 
-        {/* Form */}
+        
         <form onSubmit={handleLogin} className="space-y-5">
 
           <div>

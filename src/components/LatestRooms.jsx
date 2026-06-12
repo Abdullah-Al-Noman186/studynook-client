@@ -26,7 +26,7 @@ const LatestRooms = () => {
     <section className="py-24 bg-gradient-to-b from-white via-indigo-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <div className="max-w-7xl mx-auto px-5">
 
-        {/* TITLE (same style as HomePage) */}
+       
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ const LatestRooms = () => {
           Latest rooms added to StudyNook
         </p>
 
-        {/* GRID */}
+       
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-14">
 
           {rooms.map((room) => (
@@ -55,17 +55,17 @@ const LatestRooms = () => {
               className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             >
 
-              {/* glow effect (same style as your cards) */}
+             
               <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-20 bg-gradient-to-r from-indigo-500 to-blue-500"></div>
 
-              {/* IMAGE */}
+              
               <img
                 src={room.image}
                 className="h-48 w-full object-cover rounded-xl"
                 alt={room.roomName}
               />
 
-              {/* CONTENT */}
+              
               <h3 className="text-xl font-semibold mt-4 text-slate-900 dark:text-white">
                 {room.roomName}
               </h3>
@@ -74,7 +74,7 @@ const LatestRooms = () => {
                 {room.description?.slice(0, 100)}...
               </p>
 
-              {/* INFO */}
+              
               <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 mt-3">
                 <span>📍 {room.floor}</span>
                 <span>👥 {room.capacity}</span>
@@ -84,7 +84,7 @@ const LatestRooms = () => {
                 ${room.hourlyRate}/hr
               </div>
 
-              {/* AMENITIES */}
+          
               <div className="flex flex-wrap gap-1 mt-3">
                 {room.amenities?.slice(0, 3).map((a, i) => (
                   <span
@@ -102,7 +102,7 @@ const LatestRooms = () => {
                 )}
               </div>
 
-              {/* BUTTON */}
+              
               <Link
                 href={`/rooms/${room._id}`}
                 className="mt-4 block text-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl transition font-medium"
