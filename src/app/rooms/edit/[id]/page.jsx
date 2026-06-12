@@ -83,35 +83,54 @@ const EditRoomPage = () => {
 
   // UPDATE ROOM
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      setUpdating(true);
+  const toastId = toast.loading("Updating room...");
 
-      const payload = {
-        ...formData,
-        capacity: Number(formData.capacity),
-        hourlyRate: Number(formData.hourlyRate),
-        amenities: selectedAmenities,
-      };
+  try {
+    setUpdating(true);
 
-      const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`, {
+    const payload = {
+      ...formData,
+      capacity: Number(formData.capacity),
+      hourlyRate: Number(formData.hourlyRate),
+      amenities: selectedAmenities,
+    };
+
+    const res = await fetch(
+      `https://studynook-server-8mek.onrender.com/rooms/${id}`,
+      {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
-      });
+      }
+    );
 
-      if (!res.ok) throw new Error("Update failed");
+    const data = await res.json();
 
-      router.push(`/rooms/${id}`);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setUpdating(false);
+    if (!res.ok) {
+      throw new Error(data.message || "Update failed");
     }
-  };
+
+    toast.success("Room updated successfully! ✅", {
+      id: toastId,
+    });
+
+    setTimeout(() => {
+      router.push(`/rooms/${id}`);
+    }, 1000);
+  } catch (err) {
+    setError(err.message);
+
+    toast.error(err.message || "Failed to update room", {
+      id: toastId,
+    });
+  } finally {
+    setUpdating(false);
+  }
+};
 
   if (loading) {
     return (

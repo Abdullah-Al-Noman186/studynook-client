@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import BookingModal from "@/components/BookingModal";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 const RoomDetailsPage = () => {
   const { id } = useParams();
@@ -49,34 +50,58 @@ const RoomDetailsPage = () => {
   }, [id]);
 
   const handleDelete = async () => {
-    try {
-      setDeleting(true);
-      const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`, {
+  const toastId = toast.loading("Deleting room...");
+
+  try {
+    setDeleting(true);
+
+    const res = await fetch(
+      `https://studynook-server-8mek.onrender.com/rooms/${id}`,
+      {
         method: "DELETE",
-      });
-      if (res.ok) {
-        router.push("/rooms");
       }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setDeleting(false);
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to delete room");
     }
-  };
+
+    toast.success("Room deleted successfully!", {
+      id: toastId,
+    });
+
+    setTimeout(() => {
+      router.push("/rooms");
+    }, 1000);
+  } catch (err) {
+    toast.error(err.message || "Failed to delete room", {
+      id: toastId,
+    });
+  } finally {
+    setDeleting(false);
+  }
+};
 
   // Called after successful booking to increment bookingCount in UI
   const handleBookingSuccess = async () => {
-    try {
-      const res = await fetch(`https://studynook-server-8mek.onrender.com/rooms/${id}`,
-        
-        
-      );
-      const data = await res.json();
-      setRoom(data);
-    } catch (err) {
-      console.log(err);
+  try {
+    toast.success("Room booked successfully! 🎉");
+
+    const res = await fetch(
+      `https://studynook-server-8mek.onrender.com/rooms/${id}`
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to refresh room data");
     }
-  };
+
+    const data = await res.json();
+    setRoom(data);
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to refresh room details");
+  }
+};
 
   if (loading) {
     return (

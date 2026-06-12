@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -48,8 +49,11 @@ const handleSubmit = async (e) => {
 
   if (passwordError) {
     setError(passwordError);
+    toast.error(passwordError);
     return;
   }
+
+  const toastId = toast.loading("Creating your account...");
 
   try {
     setLoading(true);
@@ -63,19 +67,29 @@ const handleSubmit = async (e) => {
 
     if (error) {
       setError(error.message);
+
+      toast.error(error.message, {
+        id: toastId,
+      });
+
       return;
     }
 
-    // Success
-    alert("Registration successful!");
+    toast.success("Registration successful!", {
+      id: toastId,
+    });
 
-    // Redirect to Home Page
-    router.push("/");
-
-    // Alternatively:
-    // window.location.href = "/";
+    setTimeout(() => {
+      router.push("/");
+    }, 1000);
   } catch (err) {
-    setError(err.message || "Registration failed.");
+    const message = err.message || "Registration failed.";
+
+    setError(message);
+
+    toast.error(message, {
+      id: toastId,
+    });
   } finally {
     setLoading(false);
   }

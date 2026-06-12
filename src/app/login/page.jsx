@@ -15,35 +15,46 @@ const LoginPage = () => {
     document.title = "StudyNook – Login";
   }, []);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+  const form = e.target;
+  const email = form.email.value;
+  const password = form.password.value;
 
-    try {
-      const { error } = await authClient.signIn.email({
-        email,
-        password,
-        callbackURL: "/",
+  // Show loading toast
+  const toastId = toast.loading("Logging in...");
+
+  try {
+    const { error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error(error.message || "Invalid email or password", {
+        id: toastId,
       });
-
-      if (error) {
-        toast.error(error.message || "Invalid email or password");
-        setLoading(false);
-        return;
-      }
-
-      toast.success("Login successful!");
-      setTimeout(() => router.push("/"), 1000);
-    } catch (err) {
-      toast.error(err.message || "Login failed");
-    } finally {
-      setLoading(false);
+      return;
     }
-  };
+
+    toast.success("Login successful!", {
+      id: toastId,
+    });
+
+    setTimeout(() => {
+      router.push("/");
+    }, 1000);
+  } catch (err) {
+    toast.error(err.message || "Login failed", {
+      id: toastId,
+    });
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
