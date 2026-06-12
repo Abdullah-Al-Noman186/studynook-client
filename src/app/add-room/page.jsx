@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 const amenitiesList = [
@@ -16,6 +17,7 @@ const amenitiesList = [
 
 const AddRoomPage = () => {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const router = useRouter();
 
   const handleCheckboxChange = (amenity) => {
     setSelectedAmenities((prev) =>
@@ -62,12 +64,16 @@ const AddRoomPage = () => {
     console.log(data);
 
     toast.success("Room added successfully!", {
-      id: toastId,
-    });
+  id: toastId,
+});
 
-    form.reset();
-    setSelectedAmenities([]);
-  } catch (error) {
+form.reset();
+setSelectedAmenities([]);
+
+// Redirect to Rooms page after 1 second
+setTimeout(() => {
+  router.push("/rooms");
+}, 1000);} catch (error) {
     console.error(error);
 
     toast.error(error.message || "Failed to add room", {
