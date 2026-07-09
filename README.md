@@ -1,78 +1,107 @@
-# 🎓 SkillSphere — Online Learning Platform
+# 📚 StudyNook — Library Study Room Booking Platform
 
-A modern, fully responsive online learning platform where users can explore courses, view detailed curriculums, and enroll in skill-based programs. Built with Next.js App Router and secured with BetterAuth, featuring protected dynamic routes with intelligent redirect-after-login flow.
+A full-stack web application where students and library users can list study rooms they control and any registered user can browse, search, filter, and book those rooms for a specific date and time slot. Features automatic double-booking prevention through real-time time-conflict detection.
 
 ## 🔗 Live Demo
-👉 [https://skillsphere-eight-gamma.vercel.app](https://skillsphere-eight-gamma.vercel.app)
+👉 [https://studynook-client-delta.vercel.app](https://studynook-client-delta.vercel.app)
 
 ## ✨ Core Features
-- 🔒 Protected course detail routes — unauthenticated users redirected to login and returned to their originally intended page after authentication
-- 🔐 BetterAuth integration with email/password and Google OAuth
-- 👤 Profile management — update name and avatar with live persistence
-- 🔍 Real-time course search by title
-- 🎠 Hero banner with rotating slides
-- 📱 Fully responsive across mobile, tablet, and desktop
-- 🎬 Smooth animations with Framer Motion
-- 🔔 Toast notifications for all user actions
+- 🔒 JWT authentication stored in HTTP-only cookies (XSS-safe)
+- 📅 Real-time booking conflict detection using `$gte`/`$lte` MongoDB operators
+- 🏠 Room CRUD — authenticated users can list, edit, and delete their own rooms
+- 🔍 Search rooms by name + filter by amenities
+- 📊 My Bookings dashboard with live status badges (confirmed/cancelled)
+- ❌ Cancel upcoming bookings with one click
+- 👤 Room ownership verified server-side on every mutation
+- 📱 Fully responsive across all devices
+- 🔔 Toast notifications — no `alert()` anywhere
 
 ## 🛠️ Tech Stack
 | Layer | Technology |
 |-------|-----------|
-| Framework | Next.js (App Router) |
-| Styling | Tailwind CSS, DaisyUI |
-| Auth | BetterAuth (email/password + Google OAuth) |
-| Database | MongoDB |
-| Animations | Framer Motion |
+| Frontend | React, Tailwind CSS, Framer Motion |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| Auth | Custom JWT (HTTP-only cookies) |
 | Notifications | React Hot Toast |
-| Deployment | Vercel |
+| Deployment | Vercel (client), Render (server) |
 
 ## 📦 Key Dependencies
 ```json
 {
-  "next": "latest",
-  "better-auth": "latest",
+  "react": "latest",
+  "react-router-dom": "latest",
+  "axios": "latest",
   "tailwindcss": "latest",
-  "daisyui": "latest",
   "framer-motion": "latest",
   "react-hot-toast": "latest",
-  "mongoose": "latest"
+  "react-hook-form": "latest"
 }
 ```
 
 ## 🗂️ Pages
 | Route | Access | Description |
 |-------|--------|-------------|
-| `/` | Public | Home with hero, popular courses, trending, instructors |
-| `/courses` | Public | All courses with live search |
-| `/courses/[id]` | 🔒 Private | Full course details + curriculum |
-| `/login` | Public | Email/password + Google OAuth |
-| `/register` | Public | Registration with validation |
-| `/my-profile` | 🔒 Private | View and update profile |
+| `/` | Public | Home with latest 6 rooms |
+| `/rooms` | Public | All rooms with search + filter |
+| `/rooms/:id` | Public | Room details (booking requires login) |
+| `/login` | Public | Email/password + Google login |
+| `/register` | Public | Registration with password validation |
+| `/add-room` | 🔒 Private | Add a new study room listing |
+| `/my-listings` | 🔒 Private | Manage your own rooms |
+| `/my-bookings` | 🔒 Private | View and cancel your bookings |
+
+## 🔐 How Booking Conflict Detection Works
+```js
+// Server checks if new time slot overlaps any existing confirmed booking
+const conflict = await bookingsCollection.findOne({
+  roomId: roomId,
+  status: 'confirmed',
+  $or: [
+    { startTime: { $lt: newEndTime }, endTime: { $gt: newStartTime } }
+  ]
+});
+if (conflict) return res.status(409).send({ message: 'Time slot already booked' });
+```
 
 ## 🚀 Run Locally
 
+**Client:**
 ```bash
-git clone https://github.com/Abdullah-Al-Noman186/skillsphere.git
-cd skillsphere
+git clone https://github.com/Abdullah-Al-Noman186/studynook-client.git
+cd studynook-client
 npm install
 ```
 
-Create `.env.local`:
+Create `.env`:
 ```
-BETTER_AUTH_SECRET=your_secret
-BETTER_AUTH_URL=http://localhost:3000
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-MONGODB_URI=your_mongodb_uri
-NEXT_PUBLIC_API_URL=http://localhost:3000
+VITE_API_URL=http://localhost:5000
+VITE_FIREBASE_API_KEY=your_firebase_key
 ```
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+**Server:**
+```bash
+git clone https://github.com/Abdullah-Al-Noman186/studynook-server.git
+cd studynook-server
+npm install
+```
+
+Create `.env`:
+```
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
+PORT=5000
+```
+
+```bash
+npm run dev
+```
 
 ## 🔗 Resources
-- [Live Site](https://skillsphere-eight-gamma.vercel.app)
-- [GitHub Repo](https://github.com/Abdullah-Al-Noman186/skillsphere)
+- [Live Site](https://studynook-client-delta.vercel.app)
+- [Server Repo](https://github.com/Abdullah-Al-Noman186/studynook-server)
